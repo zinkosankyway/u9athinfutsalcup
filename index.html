@@ -62,7 +62,7 @@ td.pts{font-weight:800}
 .pill.done{background:#e8f5ec;color:var(--gn)}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 .row>*{flex:1;min-width:110px}
-.row.c{align-items:center}
+.gt{display:inline-block;min-width:56px;padding:7px 9px;border:1px solid #eadfb9;background:#faf4df;border-radius:8px;font-weight:800;text-align:center}
 input,select,textarea{background:#fff;color:var(--ink);border:1px solid #e3d8b0;border-radius:8px;padding:7px 9px;width:100%}
 input.n{width:60px;text-align:center}
 td input,td select{min-width:70px}
@@ -160,7 +160,7 @@ fixtures(){
 players(){
   const ps=S.players.filter(p=>!pf||p.t===pf).sort((a,b)=>tg(b)-tg(a)||b.a-a.a||a.name.localeCompare(b.name));
   const filt=`<select id="pf" style="max-width:220px"><option value="">All teams</option>${S.teams.map(t=>`<option value="${t.id}"${t.id===pf?' selected':''}>${esc(t.name)}</option>`).join('')}</select>`;
-  const rows=ps.map(p=>admin?`<tr><td>${inp(`players|${p.id}|no`,p.no,'text','n')}</td><td>${inp(`players|${p.id}|name`,p.name)}</td><td>${sel(`players|${p.id}|t`,p.t)}</td><td>${inp(`players|${p.id}|pos`,p.pos,'text','n')}</td><td class="pts">${tg(p)}</td><td>${inp(`players|${p.id}|g`,p.g,'number','n')}</td>${['a','y','r'].map(k=>`<td>${inp(`players|${p.id}|${k}`,p[k],'number','n')}</td>`).join('')}<td><button class="btn x s" data-a="delp" data-id="${p.id}">Delete</button></td></tr>`
+  const rows=ps.map(p=>admin?`<tr><td>${inp(`players|${p.id}|no`,p.no,'text','n')}</td><td>${inp(`players|${p.id}|name`,p.name)}</td><td>${sel(`players|${p.id}|t`,p.t)}</td><td>${inp(`players|${p.id}|pos`,p.pos,'text','n')}</td><td><span class="gt">${tg(p)}</span></td><td>${inp(`players|${p.id}|g`,p.g,'number','n')}</td>${['a','y','r'].map(k=>`<td>${inp(`players|${p.id}|${k}`,p[k],'number','n')}</td>`).join('')}<td><button class="btn x s" data-a="delp" data-id="${p.id}">Delete</button></td></tr>`
     :`<tr><td>${esc(p.no)}</td><td>${esc(p.name)}</td><td>${tl(T(p.t))}</td><td>${esc(p.pos)}</td><td class="pts">${tg(p)}</td><td>${p.a}</td><td>${p.y}</td><td>${p.r}</td></tr>`).join('');
   return`<h2>Players statistics</h2>${admin?'<p class="hint">Goals from fixture scorers are counted automatically. Use "Goals (extra)" only for goals not listed in a fixture.</p>':''}<div class="row c">${filt}${admin?'<button class="btn" data-a="addp" style="flex:0;white-space:nowrap">Add player</button>':''}</div>
   <div class="wrap"><table><tr><th>No</th><th>Player</th><th>Team</th><th>Pos</th><th>Goals</th>${admin?'<th>Extra</th>':''}<th>Assists</th><th>Yellow</th><th>Red</th>${admin?'<th></th>':''}</tr>${rows||`<tr><td colspan="9" class="empty">No players yet.</td></tr>`}</table></div>
