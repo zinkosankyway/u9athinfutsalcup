@@ -144,7 +144,7 @@ overview(){
   const tb=table(),pl=S.matches.filter(played),g=pl.reduce((s,m)=>s+ +m.hs+ +m.as,0);
   const top=[...S.players].sort((a,b)=>tg(b)-tg(a))[0],next=S.matches.filter(m=>!played(m)).slice(0,NEXT_MATCHES),last=pl[pl.length-1];
   const st=(l,v,f,i)=>`<div class="card st"><div class="stt"><span>${l}</span><span class="ic">${i}</span></div><b>${v}</b><small>${f}</small></div>`;
-  return`<div class="ph"><h1>${esc(S.name)}</h1><div class="sub">${S.teams.length} teams, Every Team, Every Rival</div></div>
+  return`<div class="ph"><h1>${esc(S.name)}</h1><div class="sub">${S.teams.length} teams, Every Team, Every Rival!</div></div>
   <div class="grid">${st('Matches played',pl.length+' of '+S.matches.length,'Round-robin league','📅')}${st('Goals scored',g,pl.length?(g/pl.length).toFixed(1)+' per match':'No matches played','⚽')}${st('Leading team',pl.length?esc(tb[0].t.name):'Not started',pl.length?tb[0].pts+' points':'Waiting for first result','🏆')}${st('Top scorer',top&&tg(top)?esc(top.name):'None yet',top&&tg(top)?tg(top)+' goals':'Add player stats','👟')}</div>
   <h2>Standing</h2>${tableHtml(tb,false)}
   <h2>Next and latest</h2>${next.length?'<div class="hint">Next '+(next.length>1?'matches':'match')+'</div>'+next.map(m=>matchCard(m,1)).join(''):''}${last?'<div class="hint">Latest result</div>'+matchCard(last,1):''}${!next.length&&!last?'<div class="empty">No matches yet.</div>':''}
