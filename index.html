@@ -87,7 +87,7 @@ textarea{min-height:110px}
 <script>
 // ---- Admin password: stored only as a scrambled hash. Default password is admin123.
 // To change it, open your page with #hash at the end of the address, create a new hash, and paste it below.
-const ADMIN_HASH='0ba97a6573f0d0fd60ef8f31a77142e607362e8ea2f3d1f474987e9ead7550c1';
+const ADMIN_HASH='c63536ebff50beb15ebe54f0669c0ccafe0147ac61fa07344ad5d797908d8c16';
 async function hp(p){const k=await crypto.subtle.importKey('raw',new TextEncoder().encode(p),'PBKDF2',false,['deriveBits']);const b=await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:new TextEncoder().encode('u9-tournament'),iterations:200000},k,256);return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
 async function login(){const p=prompt('Admin password');if(p===null)return;if(await hp(p)===ADMIN_HASH){admin=true;sessionStorage.setItem('u9admin','1');let ls=null;try{ls=JSON.parse(localStorage.getItem(KEY))}catch(x){}if(ls)S=ls;render()}else alert('Wrong password.')}
 function hashTool(){if($('#dlg'))return;const d=document.createElement('div');d.id='dlg';d.innerHTML=`<div class="card"><h2 style="margin-top:0">Create password hash</h2><div class="row"><input id="hp" type="password" placeholder="New admin password"></div><div class="row"><button class="btn" id="hg">Generate</button><button class="btn o" id="hc">Close</button></div><textarea id="ho" readonly placeholder="Your hash appears here" style="min-height:70px"></textarea></div>`;document.body.appendChild(d);$('#hc').onclick=()=>d.remove();$('#hg').onclick=async()=>{const p=$('#hp').value;if(p.length<8){msg('Use at least 8 characters.',0);return}$('#ho').value=await hp(p)}}
