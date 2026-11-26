@@ -101,11 +101,13 @@ function def(){
     matches:p.map((x,i)=>({id:'m'+i,round:Math.floor(i/2)+1,h:t[x[0]].id,a:t[x[1]].id,date:'',time:'',venue:i%2?'Field 2':'Main Stadium',hs:'',as:''}))};
 }
 async function init(){
-  let d=null;
-  try{const r=await fetch('data.json?t='+Date.now(),{cache:'no-store'});if(r.ok)d=await r.json()}catch(e){}
-  let ls=null;try{ls=JSON.parse(localStorage.getItem(KEY))}catch(e){}
-  S=(admin&&ls)||d||ls||def();
-  render();
+  const g=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+  const ls=g(KEY),ca=g(KEY+'c');
+  S=(admin&&ls)||ca||ls||def();render();
+  try{
+    const r=await fetch('data.json',{cache:'no-cache'});
+    if(r.ok){const d=await r.json();localStorage.setItem(KEY+'c',JSON.stringify(d));if(!(admin&&ls)&&JSON.stringify(d)!==JSON.stringify(S)){S=d;render()}}
+  }catch(e){}
 }
 function save(){localStorage.setItem(KEY,JSON.stringify(S));render()}
 
@@ -211,7 +213,7 @@ async function push(g){
 
 function img(f,cb){
   if(!f)return;const r=new FileReader();
-  r.onload=()=>{const i=new Image();i.onload=()=>{const c=document.createElement('canvas'),s=Math.min(1,200/Math.max(i.width,i.height));c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);cb(c.toDataURL('image/png'))};i.src=r.result};
+  r.onload=()=>{const i=new Image();i.onload=()=>{const c=document.createElement('canvas'),s=Math.min(1,128/Math.max(i.width,i.height));c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);cb(c.toDataURL('image/png'))};i.src=r.result};
   r.readAsDataURL(f);
 }
 
