@@ -1,0 +1,95 @@
+{
+ "name": "U9 GG Cup",
+ "logo": "",
+ "teams": [
+  {
+   "id": "t0",
+   "name": "U9 Lions",
+   "logo": ""
+  },
+  {
+   "id": "t1",
+   "name": "U9 Eagles",
+   "logo": ""
+  },
+  {
+   "id": "t2",
+   "name": "U9 Tigers",
+   "logo": ""
+  },
+  {
+   "id": "t3",
+   "name": "U9 Wolves",
+   "logo": ""
+  }
+ ],
+ "players": [],
+ "matches": [
+  {
+   "id": "m0",
+   "round": 1,
+   "h": "t0",
+   "a": "t1",
+   "date": "",
+   "time": "",
+   "venue": "Main Stadium",
+   "hs": "",
+   "as": ""
+  },
+  {
+   "id": "m1",
+   "round": 1,
+   "h": "t2",
+   "a": "t3",
+   "date": "",
+   "time": "",
+   "venue": "Field 2",
+   "hs": "",
+   "as": ""
+  },
+  {
+   "id": "m2",
+   "round": 2,
+   "h": "t0",
+   "a": "t2",
+   "date": "",
+   "time": "",
+   "venue": "Main Stadium",
+   "hs": "",
+   "as": ""
+  },
+  {
+   "id": "m3",
+   "round": 2,
+   "h": "t1",
+   "a": "t3",
+   "date": "",
+   "time": "",
+   "venue": "Field 2",
+   "hs": "",
+   "as": ""
+  },
+  {
+   "id": "m4",
+   "round": 3,
+   "h": "t0",
+   "a": "t3",
+   "date": "",
+   "time": "",
+   "venue": "Main Stadium",
+   "hs": "",
+   "as": ""
+  },
+  {
+   "id": "m5",
+   "round": 3,
+   "h": "t1",
+   "a": "t2",
+   "date": "",
+   "time": "",
+   "venue": "Field 2",
+   "hs": "",
+   "as": ""
+  }
+ ]
+}
